@@ -1,19 +1,8 @@
-````bash
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```powershell
-pip install -r requirements.txt
-```
-````
-
-See the ` ```powershell ` stuck right after the closing ` ``` ` with no line break between them? That confuses GitHub's markdown renderer, and once it hits a broken fence, everything after it gets treated as one giant unformatted block — which is why all your headers, bullets, and spacing collapsed into a single wall of text.
-
-Here's a corrected, properly-formatted version:
-
-````markdown
 # Insurance Document Assistant
 
-A local RAG (Retrieval-Augmented Generation) tool that lets you ask natural language questions about your insurance PDFs (handbooks, policies, etc.) and get answers grounded in the actual document text, with source citations.
+A local RAG (Retrieval-Augmented Generation) tool that lets you ask natural
+language questions about your insurance PDFs (handbooks, policies, etc.) and
+get answers grounded in the actual document text, with source citations.
 
 ## What This Pipeline Does
 
@@ -51,18 +40,18 @@ User Question                          |
 
 2. Create a virtual environment and install dependencies:
 
-```powershell
+   ```powershell
    python -m venv .venv
    .\.venv\Scripts\Activate.ps1
    pip install -r requirements.txt
-```
+   ```
 
 3. Add your Anthropic API key:
 
-```bash
+   ```bash
    cp .env.example .env
    # then edit .env and paste in your key
-```
+   ```
 
 4. Drop your PDFs into `data/raw/`.
 
@@ -95,7 +84,7 @@ streamlit run main.py
 
 ## Project structure
 
-````
+```
 insurance-assistant/
 ├── data/
 │   ├── raw/              # put your PDFs here
@@ -109,3 +98,14 @@ insurance-assistant/
 ├── requirements.txt
 ├── .env.example
 └── README.md
+```
+
+## Notes / next steps
+
+- The embedding model (`all-MiniLM-L6-v2`) runs fully locally and free —
+  only the final answer generation calls the Claude API.
+- Chunk size/overlap in `ingest.py` can be tuned; smaller chunks tend to
+  work better for glossary-style reference material, larger ones for
+  narrative text.
+- Natural next steps: highlighting the exact retrieved passage in the
+  Streamlit UI, or supporting more file types (docx, txt).
